@@ -25,6 +25,7 @@ public class ProduitController {
                                @org.springframework.web.bind.annotation.RequestParam(required = false) String keyword,
                                @org.springframework.web.bind.annotation.RequestParam(required = false) String type,
                                @org.springframework.web.bind.annotation.RequestParam(required = false) String sort,
+                               @org.springframework.web.bind.annotation.RequestParam(required = false, defaultValue = "asc") String dir,
                                @org.springframework.web.bind.annotation.RequestParam(defaultValue = "0") int page,
                                @org.springframework.web.bind.annotation.RequestParam(defaultValue = "5") int size) {
         
@@ -37,8 +38,10 @@ public class ProduitController {
             model.addAttribute("type", type);
             return "index"; // Filter doesn't support pagination yet
         } else if (sort != null) {
-             model.addAttribute("produits", produitService.obtenirTousLesProduitsTries(sort));
-             model.addAttribute("sort", sort);
+             model.addAttribute("produits", produitService.obtenirTousLesProduitsTries(sort, dir));
+             model.addAttribute("sortField", sort);
+             model.addAttribute("sortDir", dir);
+             model.addAttribute("reverseSortDir", dir.equals("asc") ? "desc" : "asc");
              return "index"; // Sort doesn't support pagination yet
         }
         

@@ -177,22 +177,63 @@
                 <table class="table table-hover mb-0 align-middle">
                     <thead class="table-dark">
                         <tr>
-                            <th class="py-3 ps-3"><a th:href="@{/(sort='id')}"
-                                    class="text-white text-decoration-none">ID <i
-                                        class="fas fa-sort text-secondary small"></i></a></th>
-                            <th class="py-3"><a th:href="@{/(sort='nom')}" class="text-white text-decoration-none">Nom
-                                    <i class="fas fa-sort text-secondary small"></i></a></th>
-                            <th class="py-3"><a th:href="@{/(sort='typeThe')}"
-                                    class="text-white text-decoration-none">Type <i
-                                        class="fas fa-sort text-secondary small"></i></a></th>
-                            <th class="py-3"><a th:href="@{/(sort='origine')}"
-                                    class="text-white text-decoration-none">Origine <i
-                                        class="fas fa-sort text-secondary small"></i></a></th>
-                            <th class="py-3"><a th:href="@{/(sort='prix')}" class="text-white text-decoration-none">Prix
-                                    <i class="fas fa-sort text-secondary small"></i></a></th>
-                            <th class="py-3"><a th:href="@{/(sort='quantiteStock')}"
-                                    class="text-white text-decoration-none">Stock <i
-                                        class="fas fa-sort text-secondary small"></i></a></th>
+                            <th class="py-3 ps-3">
+                                <a th:href="@{/(sort='id', dir=${sortField == 'id' ? reverseSortDir : 'asc'})}"
+                                    class="text-white text-decoration-none">
+                                    ID
+                                    <i th:if="${sortField == 'id'}"
+                                        th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                    <i th:unless="${sortField == 'id'}" class="fas fa-sort text-secondary small"></i>
+                                </a>
+                            </th>
+                            <th class="py-3">
+                                <a th:href="@{/(sort='nom', dir=${sortField == 'nom' ? reverseSortDir : 'asc'})}"
+                                    class="text-white text-decoration-none">
+                                    Nom
+                                    <i th:if="${sortField == 'nom'}"
+                                        th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                    <i th:unless="${sortField == 'nom'}" class="fas fa-sort text-secondary small"></i>
+                                </a>
+                            </th>
+                            <th class="py-3">
+                                <a th:href="@{/(sort='typeThe', dir=${sortField == 'typeThe' ? reverseSortDir : 'asc'})}"
+                                    class="text-white text-decoration-none">
+                                    Type
+                                    <i th:if="${sortField == 'typeThe'}"
+                                        th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                    <i th:unless="${sortField == 'typeThe'}"
+                                        class="fas fa-sort text-secondary small"></i>
+                                </a>
+                            </th>
+                            <th class="py-3">
+                                <a th:href="@{/(sort='origine', dir=${sortField == 'origine' ? reverseSortDir : 'asc'})}"
+                                    class="text-white text-decoration-none">
+                                    Origine
+                                    <i th:if="${sortField == 'origine'}"
+                                        th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                    <i th:unless="${sortField == 'origine'}"
+                                        class="fas fa-sort text-secondary small"></i>
+                                </a>
+                            </th>
+                            <th class="py-3">
+                                <a th:href="@{/(sort='prix', dir=${sortField == 'prix' ? reverseSortDir : 'asc'})}"
+                                    class="text-white text-decoration-none">
+                                    Prix
+                                    <i th:if="${sortField == 'prix'}"
+                                        th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                    <i th:unless="${sortField == 'prix'}" class="fas fa-sort text-secondary small"></i>
+                                </a>
+                            </th>
+                            <th class="py-3">
+                                <a th:href="@{/(sort='quantiteStock', dir=${sortField == 'quantiteStock' ? reverseSortDir : 'asc'})}"
+                                    class="text-white text-decoration-none">
+                                    Stock
+                                    <i th:if="${sortField == 'quantiteStock'}"
+                                        th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></i>
+                                    <i th:unless="${sortField == 'quantiteStock'}"
+                                        class="fas fa-sort text-secondary small"></i>
+                                </a>
+                            </th>
                             <th class="py-3">Réception</th>
                             <th class="py-3 text-end pe-3">Actions</th>
                         </tr>

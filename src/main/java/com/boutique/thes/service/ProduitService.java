@@ -22,8 +22,10 @@ public class ProduitService {
         return produitRepository.findAll();
     }
 
-    public List<Produit> obtenirTousLesProduitsTries(String field) {
-        return produitRepository.findAll(org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.ASC, field));
+    public List<Produit> obtenirTousLesProduitsTries(String field, String direction) {
+        org.springframework.data.domain.Sort.Direction dir = direction.equalsIgnoreCase("desc") ? 
+            org.springframework.data.domain.Sort.Direction.DESC : org.springframework.data.domain.Sort.Direction.ASC;
+        return produitRepository.findAll(org.springframework.data.domain.Sort.by(dir, field));
     }
 
     public List<Produit> rechercherProduits(String keyword) {
