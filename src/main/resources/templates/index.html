@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Boutique de Thés</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Gestion de la Boutique de Thés</h1>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form th:action="@{/}" method="get" class="d-flex gap-2">
+                    <input type="text" name="keyword" class="form-control" placeholder="Rechercher par nom..."
+                        th:value="${keyword}">
+                    <button type="submit" class="btn btn-outline-primary">Rechercher</button>
+                    <a th:href="@{/}" class="btn btn-outline-secondary">Reset</a>
+                </form>
+            </div>
+            <div class="col-md-3">
+                <form th:action="@{/}" method="get" class="d-flex gap-2">
+                    <select name="type" class="form-select" onchange="this.form.submit()">
+                        <option value="">Filtrer par Type</option>
+                        <option value="Vert" th:selected="${type == 'Vert'}">Vert</option>
+                        <option value="Noir" th:selected="${type == 'Noir'}">Noir</option>
+                        <option value="Blanc" th:selected="${type == 'Blanc'}">Blanc</option>
+                        <option value="Oolong" th:selected="${type == 'Oolong'}">Oolong</option>
+                        <option value="Rooibos" th:selected="${type == 'Rooibos'}">Rooibos</option>
+                        <option value="Herbal" th:selected="${type == 'Herbal'}">Tisane</option>
+                    </select>
+                </form>
+            </div>
+            <div class="col-md-3 text-end">
+                <a th:href="@{/export}" class="btn btn-success me-2">Export CSV</a>
+                <a th:href="@{/nouveau}" class="btn btn-primary">Ajouter un thé</a>
+            </div>
+        </div>
+
+        <table class="table table-striped table-bordered text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th><a th:href="@{/(sort='id')}" class="text-white text-decoration-none">ID</a></th>
+                    <th><a th:href="@{/(sort='nom')}" class="text-white text-decoration-none">Nom</a></th>
+                    <th><a th:href="@{/(sort='typeThe')}" class="text-white text-decoration-none">Type</a></th>
+                    <th><a th:href="@{/(sort='origine')}" class="text-white text-decoration-none">Origine</a></th>
+                    <th><a th:href="@{/(sort='prix')}" class="text-white text-decoration-none">Prix (€)</a></th>
+                    <th><a th:href="@{/(sort='quantiteStock')}" class="text-white text-decoration-none">Stock</a></th>
+                    <th>Date Réception</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="produit : ${produits}">
+                    <td th:text="${produit.id}">1</td>
+                    <td th:text="${produit.nom}">Thé Vert</td>
+                    <td th:text="${produit.typeThe}">Vert</td>
+                    <td th:text="${produit.origine}">Chine</td>
+                    <td th:text="${produit.prix}">10.5</td>
+                    <td th:text="${produit.quantiteStock}">50</td>
+                    <td th:text="${produit.dateReception}">2024-01-01</td>
+                    <td>
+                        <a th:href="@{/modifier/{id}(id=${produit.id})}" class="btn btn-warning btn-sm">Modifier</a>
+                        <a th:href="@{/supprimer/{id}(id=${produit.id})}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Êtes-vous sûr ?')">Supprimer</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <nav aria-label="Pagination" th:if="${totalPages > 0}">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/(page=${currentPage - 1})}">Précédent</a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                    th:classappend="${currentPage == i} ? 'active'">
+                    <a class="page-link" th:href="@{/(page=${i})}" th:text="${i + 1}">1</a>
+                </li>
+                <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{/(page=${currentPage + 1})}">Suivant</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
