@@ -1,4 +1,4 @@
-# Boutique de Thés - Spring Boot Application
+# Boutique de Thés - Spring Boot Application - DEDU STEPHANE
 
 Une application complète de gestion de boutique de thés, développée avec **Spring Boot** et **Thymeleaf**.
 
